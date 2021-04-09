@@ -36,21 +36,21 @@ public class ProductController {
 //        model.addAttribute("product",new Product());
 //        return "product/add";
 //    }
+//
+//    @PostMapping("/addorupdate")
+//    public String addOrUpdate(ModelMap model, Product product){
+//        productService.saveProduct(product);
+//        model.addAttribute("product",new Product());
+//        return "product/add";
+//    }
 
-    @PostMapping("/addorupdate")
-    public String addOrUpdate(ModelMap model, Product product){
-        productService.saveProduct(product);
-        model.addAttribute("product",new Product());
-        return "product/add";
-    }
-
-
-    @GetMapping("/products")
-    public String listProduct(ModelMap model){
-        List<Product> product = productService.findAllProduct();
-        model.addAttribute("product",product);
-            return "admin/products";
-        }
+//
+//    @GetMapping("/products")
+//    public String listProduct(ModelMap model){
+//        List<Product> product = productService.findAllProduct();
+//        model.addAttribute("product",product);
+//            return "admin/products";
+//        }
 
 
 //    @GetMapping("/edit/{id}")
@@ -73,9 +73,9 @@ public class ProductController {
 
 
 
-    @GetMapping("/delete/{id}")
-    public String delete(ModelMap model, @PathVariable(name = "id") Integer id){
-        productService.deleteProduct(id);
-        return listProduct(model);
-    }
+//    @GetMapping("/delete/{id}")
+//    public String delete(ModelMap model, @PathVariable(name = "id") Integer id){
+//        productService.deleteById(id);
+//        return listProduct(model);
+//    }
 }
