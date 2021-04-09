@@ -10,15 +10,25 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
-        @Autowired
-        CategoryReponsitories categoryReponsitories;
+    @Autowired
+    CategoryReponsitories categoryReponsitories;
 
     @Override
     public Category save(Category s) {
         return categoryReponsitories.save(s);
     }
+
     @Override
     public List<Category> findAll() {
-        return (List<Category> ) categoryReponsitories.findAll();
+        return (List<Category>) categoryReponsitories.findAll();
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        categoryReponsitories.deleteById(integer);
+    }
+    @Override
+    public Optional<Category> findById(Integer integer) {
+        return categoryReponsitories.findById(integer);
     }
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<Product> findAllProduct();
 
+
+    Product save(Product s);
+
+    List<Product> findAll();
+
+    void deleteById(Integer integer);
 
     Optional<Product> findById(Integer integer);
-
-    void saveProduct(Product product);
-
-    void deleteProduct(Integer id);
 }

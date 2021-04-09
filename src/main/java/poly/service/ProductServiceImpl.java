@@ -1,6 +1,5 @@
 package poly.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import poly.entity.Product;
@@ -12,27 +11,24 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService{
     @Autowired
-    ProductReponsitories productReponsitories;
+    ProductReponsitories ProductReponsitories;
 
     @Override
-    public List<Product> findAllProduct() {
-        return (List<Product>) productReponsitories.findAll();
+    public Product save(Product s) {
+        return ProductReponsitories.save(s);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return (List<Product>) ProductReponsitories.findAll();
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        ProductReponsitories.deleteById(integer);
     }
     @Override
     public Optional<Product> findById(Integer integer) {
-        return productReponsitories.findById(integer);
+        return ProductReponsitories.findById(integer);
     }
-
-    @Override
-    public void saveProduct(Product product) {
-        productReponsitories.save(product);
-    }
-
-    @Override
-    public void deleteProduct(Integer id) {
-        productReponsitories.deleteById(id);
-
-    }
-
-
 }
