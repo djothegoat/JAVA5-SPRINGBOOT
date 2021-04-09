@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<form th:action="@{/admin/product/save}" method="post" th:object="${product}">-->
+<!--    <input type="text" th:field="*{name} "><br />-->
+<!--    <input type="text" th:field="*{categoryByCategory} "><br />-->
+<!--    <input type="text" th:field="*{detail} "><br />-->
+<!--    <input type="number" th:field="*{price} "><br />-->
+<!--    <input type="number" th:field="*{quantity} "><br />-->
+<!--    <input type="text" th:field="*{images} "><br />-->
+<!--    <input type="radio" th:field="*{status} " value="Stocking">-->
+<!--    <input type="radio" th:field="*{status} " value="Out Of Stock"><br />-->
+<!--    <input type="text" th:field="*{discount} "><br />-->
+<!--    <input type="submit" value="add" />-->
+<!--</form>-->
+
+<form th:action="@{/admin/product/save}" method="post" th:object="${category}">
+    <input type="text" th:field="*{name} "><br />
+    <input type="radio" th:field="*{status}" value="1">Còn
+    <input type="radio" th:field="*{status}" value="0">hết<br />
+    <input type="submit" value="add" />
+</form>
+
+
+</body>
+</html>
