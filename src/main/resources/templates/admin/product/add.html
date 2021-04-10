@@ -149,15 +149,15 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>Product Name</label>
-                                    <input th:text="*{name}" class="form-control" type="text" placeholder="Tên sản phẩm">
+                                    <input name="name" class="form-control" type="text" placeholder="Tên sản phẩm">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Price</label>
-                                    <input th:text="*{price}" class="form-control" type="number" placeholder="Giá">
+                                    <input name="price" class="form-control" type="number" placeholder="Giá">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Quantity</label>
-                                    <input th:text="*{quantity}" class="form-control" type="number" placeholder="Giá">
+                                    <input name="quantity" class="form-control" type="number" placeholder="Giá">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Category</label>
@@ -173,21 +173,23 @@
                                     <label>Detail</label>
                                     <input name="detail" class="form-control" type="text" placeholder="Tên sản phẩm">
                                 </div>
-                                <!--                                <div class="col-md-6">-->
-                                <!--                                    <label>Status</label>-->
-                                <!--                                    <li>-->
-                                <!--                                        <input type="radio" th:field="*{status}" value=1 />-->
-                                <!--                                        <label  th:text="Stocking"></label>-->
-                                <!--                                        <input type="radio" th:field="*{status}" value=0 />-->
-                                <!--                                        <label  th:text="Out Of Stock"></label>-->
-                                <!--                                    </li>-->
-                                <!--                                </div>-->
+                                                                <div class="col-md-6">
+                                                                    <label>Status</label>
+                                                                    <li>
+                                                                        <input type="radio" th:field="*{status}" value=1 />
+                                                                        <label>Stocking</label>
+                                                                        <input type="radio" th:field="*{status}" value=0 />
+                                                                        <label>Out Of Stock</label>
+                                                                    </li>
+                                                                </div>
 
                                 <div class="col-md-6">
                                     <label>Link image</label>
-<!--                                    <input name="imagesfile" class="form-control" type="file" >-->
-
                                     <input name="imagesfile" class="form-control" type="file" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Discount</label>
+                                    <input name="discount" class="form-control" type="number" >
                                 </div>
 
 

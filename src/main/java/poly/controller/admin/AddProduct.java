@@ -43,17 +43,21 @@ public class AddProduct {
         }
         else{
             try {
-                System.out.println(product.getPrice());
-                String photoPath = context.getRealPath("/img/"+photo.getOriginalFilename()+Math.random()*100);
-                photo.transferTo(new File(photoPath));
-                product.setImages(photo.getOriginalFilename());
+                String productImage =photo.getOriginalFilename();
+                product.setImages(productImage);
                 productService.save(product);
+                File pro = new File("C:\\Users\\1Gucci\\IdeaProjects\\JAVA5-SPRINGBOOT\\src\\main\\resources\\static\\img\\" + productImage);
+                if(!pro.exists()){
+                    photo.transferTo(pro);
+                }
+
                 return "admin/product/add";
             }
             catch (Exception e) {
                 model.addAttribute("message", "Lỗi lưu file !");
             }
         }
+
 
         model.addAttribute("category",new Category());
         return "admin/product/add";
