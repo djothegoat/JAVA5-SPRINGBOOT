@@ -35,27 +35,27 @@ public class UpdateProduct {
 
     @PostMapping("product/update")
     public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo) {
+        String productImage =photo.getOriginalFilename();
         if(photo.isEmpty()){
             model.addAttribute("message", "Vui lòng chọn file !");
         }
         else{
             try {
-                String productImage =photo.getOriginalFilename();
                 product.setImages(productImage);
                 productService.save(product);
                 File pro = new File("C:\\Users\\1Gucci\\IdeaProjects\\JAVA5-SPRINGBOOT\\src\\main\\resources\\static\\img\\" + productImage);
                 if(!pro.exists()){
                     photo.transferTo(pro);
                 }
-
             }
+
             catch (Exception e) {
                 model.addAttribute("message", "Lỗi lưu file !");
             }
         }
 
-        product.setImages(photo.getOriginalFilename());
-        model.addAttribute("category",new Category());
-        return "admin/product/update";
+
+        productService.save(product);
+        return "redirect:/admin/product/list";
     }
 }

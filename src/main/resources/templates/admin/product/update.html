@@ -144,20 +144,20 @@
                                         <input th:field="*{id}" class="form-control" type="number" style="display: none">
                                 <div class="col-md-12">
                                     <label>Product Name</label>
-                                    <input  th:field="*{name}" class="form-control" type="text" placeholder="Tên sản phẩm">
+                                    <input name="name" th:field="*{name}" class="form-control" type="text" placeholder="Tên sản phẩm">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Price</label>
-                                    <input  th:field="*{price}" class="form-control" type="number" placeholder="Giá">
+                                    <input name="price" th:field="*{price}" class="form-control" type="number" placeholder="Giá">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Quantity</label>
-                                    <input  th:field="*{quantity}" class="form-control" type="number" placeholder="Số lượng">
+                                    <input name="quantity" th:field="*{quantity}" class="form-control" type="number" placeholder="Số lượng">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Category</label>
 
-                                    <select  th:field="*{categoryByCategory}" class="custom-select">
+                                    <select name="categoryByCategory" th:field="*{categoryByCategory}" class="custom-select">
                                         <option th:each="s : ${category}"
                                                 th:value="${s.id}"
                                                 th:utext="${s.name}"/>
@@ -166,12 +166,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Detail</label>
-                                    <input  th:field="*{detail}" class="form-control" type="text" placeholder="Mô tả">
+                                    <input name="detail" th:field="*{detail}" class="form-control" type="text" placeholder="Mô tả">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Status</label>
                                     <li>
-                                        <input  th:field="*{status}" value=1 />
+                                        <input type="radio" th:field="*{status}" value=1 />
                                         <label>Stocking</label>
                                         <input type="radio" th:field="*{status}" value=0 />
                                         <label>Out Of Stock</label>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Discount</label>
-                                    <input  th:field="*{discount}" class="form-control" type="number" >
+                                    <input name="discount" th:field="*{discount}" class="form-control" type="number" >
                                 </div>
                                 <div class="col-md-6">
                                     <label>Link image</label>
