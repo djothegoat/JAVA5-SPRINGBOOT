@@ -138,31 +138,26 @@
             <div class="col-lg-8">
                 <div class="checkout-inner">
                     <div class="billing-address">
-                        <h2>Add Product</h2>
-                        <form th:action="@{/admin/product/save}" method="post" th:object="${product}" enctype="multipart/form-data">
+                        <h2>Update Product</h2>
+                        <form th:action="@{/admin/product/update}" method="post" th:object="${product}" enctype="multipart/form-data">
                             <div class="row">
-                                <div th:if="${id >0}">
-                                    <div class="col-md-12">
-                                        <label>Product ID</label>
-                                        <input th:field="*{id}" class="form-control" type="number" placeholder="Mã Sản phẩm">
-                                    </div>
-                                </div>
+                                        <input th:field="*{id}" class="form-control" type="number" style="display: none">
                                 <div class="col-md-12">
                                     <label>Product Name</label>
-                                    <input name="name" th:field="*{name}" class="form-control" type="text" placeholder="Tên sản phẩm">
+                                    <input  th:field="*{name}" class="form-control" type="text" placeholder="Tên sản phẩm">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Price</label>
-                                    <input name="price" th:field="*{price}" class="form-control" type="number" placeholder="Giá">
+                                    <input  th:field="*{price}" class="form-control" type="number" placeholder="Giá">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Quantity</label>
-                                    <input name="quantity" th:field="*{quantity}" class="form-control" type="number" placeholder="Số lượng">
+                                    <input  th:field="*{quantity}" class="form-control" type="number" placeholder="Số lượng">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Category</label>
 
-                                    <select name="categoryByCategory" th:field="*{categoryByCategory}" class="custom-select">
+                                    <select  th:field="*{categoryByCategory}" class="custom-select">
                                         <option th:each="s : ${category}"
                                                 th:value="${s.id}"
                                                 th:utext="${s.name}"/>
@@ -171,41 +166,49 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Detail</label>
-                                    <input name="detail" th:field="*{detail}" class="form-control" type="text" placeholder="Mô tả">
+                                    <input  th:field="*{detail}" class="form-control" type="text" placeholder="Mô tả">
                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <label>Status</label>
-                                                                    <li>
-                                                                        <input type="radio" th:field="*{status}" value=1 />
-                                                                        <label>Stocking</label>
-                                                                        <input type="radio" th:field="*{status}" value=0 />
-                                                                        <label>Out Of Stock</label>
-                                                                    </li>
-                                                                </div>
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                    <li>
+                                        <input  th:field="*{status}" value=1 />
+                                        <label>Stocking</label>
+                                        <input type="radio" th:field="*{status}" value=0 />
+                                        <label>Out Of Stock</label>
+                                    </li>
+                                </div>
                                 <div class="col-md-6">
                                     <label>Discount</label>
-                                    <input name="discount" th:field="*{discount}" class="form-control" type="number" >
+                                    <input  th:field="*{discount}" class="form-control" type="number" >
                                 </div>
                                 <div class="col-md-6">
                                     <label>Link image</label>
-                                    <input name="imagesfile"  class="form-control" type="file" onchange="loadFile(event)" accept="image/*"/>
-                                    <img id="output" style="padding-bottom: 10px" />
-                                    <script>
-                                        var loadFile = function(event) {
-                                            var reader = new FileReader();
-                                            reader.onload = function(){
-                                                var output = document.getElementById('output');
-                                                output.src = reader.result;
+                                    <input name="imagesfile"  class="form-control" type="file" onchange="loadFile(event)" accept="image/*" >
+                                    <label  th:text="*{getImages()}" style="display: none">Choose
+                                        file...</label>
+                                    <div th:each="p: ${product}">
+                                        <img id="output" style="padding-bottom: 10px"  th:src="@{'/img/'+${p.images}}" />
+                                        <script>
+                                            var loadFile = function(event) {
+                                                var reader = new FileReader();
+                                                reader.onload = function(){
+                                                    var output = document.getElementById('output');
+                                                    output.src = reader.result;
+                                                };
+                                                reader.readAsDataURL(event.target.files[0]);
                                             };
-                                            reader.readAsDataURL(event.target.files[0]);
-                                        };
-                                    </script>
+                                        </script>
+                                    </div>
+                                    </div>
+
+
                                 </div>
 
 
 
-                            </div>
-                            <button type="submit" class="btn btn-danger" value="add">Add</button>
+
+
+                            <button type="submit" class="btn btn-danger" value="add">Update</button>
                         </form>
 
 

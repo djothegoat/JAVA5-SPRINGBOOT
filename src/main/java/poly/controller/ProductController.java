@@ -62,20 +62,9 @@ public class ProductController {
 //        return "product/add";
 //
 //    }
-//    @GetMapping("/detail/{id}")
-//    public String detail(ModelMap model, @PathVariable(name = "id") Integer id){
-//        List<Size> size = sizeService.findAll();
-//        model.addAttribute("size",size);
-//        Optional<Product> opt = productService.findById(id);
-//        model.addAttribute("product", opt.get());
-//        return "product/detail";
-//    }
 
 
 
-//    @GetMapping("/delete/{id}")
-//    public String delete(ModelMap model, @PathVariable(name = "id") Integer id){
-//        productService.deleteById(id);
-//        return listProduct(model);
-//    }
+
+
 }

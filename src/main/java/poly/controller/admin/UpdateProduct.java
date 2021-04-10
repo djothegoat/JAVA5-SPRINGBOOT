@@ -10,34 +10,31 @@ import poly.entity.Product;
 import poly.service.CategoryService;
 import poly.service.ProductService;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/")
-public class AddProduct {
+public class UpdateProduct {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     ProductService productService;
 
     @Autowired
-    ServletContext context;
-
-
-    @Autowired
     CategoryService categoryService;
 
-    @GetMapping("product/add")
-    public String addProduct(ModelMap model){
+    @GetMapping("/product/update/{id}")
+    public String edit(ModelMap model, @PathVariable(name = "id") Integer id){
         List<Category> category = categoryService.findAll();
         model.addAttribute("category",category);
-        model.addAttribute("product",new Product());
-        return "admin/product/add";
+        Optional<Product> opt = productService.findById(id);
+        model.addAttribute("product", opt.get());
+        return "admin/product/update";
     }
 
-    @PostMapping("product/save")
-    public String save(ModelMap model,Product product, @RequestParam("imagesfile")MultipartFile photo) {
+    @PostMapping("product/update")
+    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo) {
         if(photo.isEmpty()){
             model.addAttribute("message", "Vui lòng chọn file !");
         }
@@ -50,18 +47,15 @@ public class AddProduct {
                 if(!pro.exists()){
                     photo.transferTo(pro);
                 }
+
             }
             catch (Exception e) {
                 model.addAttribute("message", "Lỗi lưu file !");
             }
         }
 
-
-        model.addAttribute("product", new Product());
-        return "redirect:/admin/product/list";
+        product.setImages(photo.getOriginalFilename());
+        model.addAttribute("category",new Category());
+        return "admin/product/update";
     }
-
-
-
-
 }
