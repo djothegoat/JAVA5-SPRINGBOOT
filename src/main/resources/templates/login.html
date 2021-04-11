@@ -64,8 +64,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">More Pages</a>
                         <div class="dropdown-menu">
-                            <a href="wishlist.html" class="dropdown-item active">Wishlist</a>
-                            <a href="login.html" class="dropdown-item">Login & Register</a>
+                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+                            <a href="login.html" class="dropdown-item active">Login & Register</a>
                             <a href="contact.html" class="dropdown-item">Contact Us</a>
                         </div>
                     </div>
@@ -125,72 +125,101 @@
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Wishlist</li>
+            <li class="breadcrumb-item active">Login & Register</li>
         </ul>
     </div>
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Wishlist Start -->
-<div class="wishlist-page">
+<!-- Login Start -->
+<div class="login">
     <div class="container-fluid">
-        <div class="wishlist-page-inner">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th style="color: #FF6F61">Product</th>
-                                <th style="color: #FF6F61">Price</th>
-                                <th style="color: #FF6F61">Category</th>
-                                <th style="color: #FF6F61">Quantity</th>
-                                <th style="color: #FF6F61">Status</th>
-                                <th style="color: #FF6F61">Remove</th>
-                                <th style="color: #FF6F61">Update</th>
-                            </tr>
-                            </thead>
-                            <tbody class="align-middle">
-                            <div th:each="p: ${product}" >
-                                <tr>
-                                    <td>
-                                        <div class="img">
-                                            <a th:href="@{'/product/' + ${p.id}}"><img th:src="@{'/img/'+${p.images}}" alt="Image"></a>
-                                            <p th:text="${p.name}"></p>
-                                        </div>
-                                    </td>
-                                    <td th:text="${p.price}"></td>
-                                    <td th:text="${p.categoryByCategory.getName()}"></td>
-
-
-                                    <td >
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text"  th:value="${p.quantity}">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </td>
-
-                                    <div th:if="${p.status} == true">
-                                        <td style="color: #FF6F61">Stocking</td>
-                                    </div>
-                                    <div th:if="${p.status} == false">
-                                        <td style="color: #FF6F61">Out Of Stock</td>
-                                    </div>
-                                    <td><a class="btn btn-light" th:href="@{'/admin/product/delete/' + ${p.id}}" role="button">X</a></td>
-                                    <td><a class="btn btn-danger" th:href="@{'/admin/product/update/' + ${p.id}}" role="button">Update</a></td>
-                                </tr>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="register-form">
+                    <form th:action="@{/users/save}" method="post" th:object="${users}" >
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                                <input  th:field="*{name}" class="form-control" type="text" placeholder="Name">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email</label>
+                                <input th:field="*{email}" class="form-control" type="text" placeholder="Email">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Address</label>
+                                <input th:field="*{address}" class="form-control" type="text" placeholder="Email">
+                            </div>
+                            <div class="col-md-6" style="display: none">
+                                <label>Role</label>
+                                <li>
+                                    <input type="radio" th:field="*{role}" value=1  />
+                                    <label>Admin</label>
+                                    <input type="radio" th:field="*{role}" value=0 id="optionsRadios1" />
+                                    <label>Guest</label>
+                                    <script>
+                                        document.getElementById("optionsRadios1").setAttribute("checked","checked")
+                                    </script>
+                                </li>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Mobile No</label>
+                                <input th:field="*{phone}" class="form-control" type="number" placeholder="Mobile No">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input th:field="*{password}" class="form-control" type="password" placeholder="Password">
+                            </div>
+                            <div class="col-md-6" style="display: none">
+                                <label>Status</label>
+                                <li>
+                                    <input type="radio" th:field="*{status}" value=1  id="optionsRadios2" />
+                                    <label>Active</label>
+                                    <input type="radio" th:field="*{status}" value=0 />
+                                    <label>Inactive</label>
+                                    <script>
+                                        document.getElementById("optionsRadios2").setAttribute("checked","checked")
+                                    </script>
+                                </li>
                             </div>
 
-                            </tbody>
-                        </table>
+                            <div class="col-md-12">
+                                <button class="btn">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>E-mail / Username</label>
+                            <input class="form-control" type="text" placeholder="E-mail / Username">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Password</label>
+                            <input class="form-control" type="text" placeholder="Password">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="newaccount">
+                                <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Wishlist End -->
+<!-- Login End -->
 
 <!-- Footer Start -->
 <div class="footer">

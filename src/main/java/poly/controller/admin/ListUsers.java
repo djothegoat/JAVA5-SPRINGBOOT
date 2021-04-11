@@ -5,29 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import poly.entity.Product;
-import poly.service.CategoryService;
-import poly.service.ProductService;
+import poly.entity.Users;
+import poly.service.UserService;
 
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/admin/")
-public class ListProduct {
+public class ListUsers {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    ProductService productService;
+    UserService userService;
 
-    @Autowired
-    CategoryService categoryService;
-
-    @GetMapping("product/list")
+    @GetMapping("/users/list")
     public String list(ModelMap model){
-        List<Product> product = productService.findAll();
-        model.addAttribute("product",product);
-        return "admin/product/list";
+        List<Users> users = userService.findAll();
+        model.addAttribute("users",users);
+        return "/admin/users/list";
     }
-
 }
