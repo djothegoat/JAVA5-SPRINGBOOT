@@ -184,8 +184,7 @@
                                 <div class="col-md-6">
                                     <label>Link image</label>
                                     <input name="imagesfile"  class="form-control" type="file" onchange="loadFile(event)" accept="image/*" >
-                                    <label  th:text="*{getImages()}" style="display: none">Choose
-                                        file...</label>
+                                    <input th:field="*{images}" style="display: none">
                                     <div th:each="p: ${product}">
                                         <img id="output" style="padding-bottom: 10px"  th:src="@{'/img/'+${p.images}}" />
                                         <script>
