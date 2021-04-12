@@ -30,4 +30,5 @@ public class ListProduct {
         return "admin/product/list";
     }
 
+
 }

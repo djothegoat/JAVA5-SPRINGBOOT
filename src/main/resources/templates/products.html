@@ -192,7 +192,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4" th:each="p: ${product}">
+                    <div class="col-md-4" th:each="p: ${product.pageList}">
                         <div class="product-item">
                             <div class="product-title">
                                 <a th:href="@{'/product/' + ${p.id}}" th:text="${p.name}"></a>
@@ -451,14 +451,24 @@
                 <div class="col-md-12">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            <li th:class="${currentIndex == 1}?'page-item disabled':'page-item active'">
+                                <a class="page-link" th:href="@{/products/}" >First</a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                            <li th:class="${currentIndex == 1}?'page-item disabled':'page-item active'">
+                                <a th:href="@{|${baseUrl}${currentIndex - 1}|}">Previous</a>
+                            </li>
+                            <li th:each="item: ${#numbers.sequence(beginIndex,endIndex)}"
+                                th:class="${item == currentIndex ?'page-item disabled':'page-item'}">
+                                <a class="page-link" th:href="@{|${baseUrl}${item}|}">
+                                    <span th:text="${item}"></span>
+                                </a>
+                            </li>
+
+                            <li  th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
+                                <a class="page-link" th:href="@{|${baseUrl}${currentIndex + 1}|}">Next</a>
+                            </li>
+                            <li th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
+                                <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}" >Last</a>
                             </li>
                         </ul>
                     </nav>
@@ -491,8 +501,7 @@
                     </nav>
                 </div>
 
-
-
+                
                 <div class="sidebar-widget brands">
                     <h2 class="title">Our Brands</h2>
                     <ul>
