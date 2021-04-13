@@ -44,8 +44,9 @@ public class Products {
         request.getSession().setAttribute("productlist",pages);
         int current = pages.getPage() + 1;
         int begin = Math.max(1,current-list.size());
-        int end = Math.min(begin + 5, pages.getPageCount());
+        int end = Math.min(begin + 20, pages.getPageCount());
         int totalPageCount = pages.getPageCount();
+        System.out.println(totalPageCount);
         String baseUrl = "/products/page/";
         model.addAttribute("beginIndex",begin);
         model.addAttribute("endIndex",end);
