@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import poly.entity.Category;
 import poly.entity.Product;
 import poly.service.CategoryService;
@@ -34,7 +35,7 @@ public class UpdateProduct {
     }
 
     @PostMapping("product/update")
-    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo) {
+    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo, RedirectAttributes redirect) {
             try {
                 String productImage =photo.getOriginalFilename();
                 if(!photo.isEmpty()){
@@ -50,6 +51,7 @@ public class UpdateProduct {
                 e.printStackTrace();
                 model.addAttribute("message", "Lỗi lưu file !");
             }
+        redirect.addFlashAttribute("success", "update product successfully!");
         return "redirect:/admin/product/list";
     }
 }

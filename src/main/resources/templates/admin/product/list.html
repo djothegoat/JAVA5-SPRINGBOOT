@@ -135,6 +135,9 @@
 <div class="wishlist-page">
     <div class="container-fluid">
         <div class="wishlist-page-inner">
+            <div th:if="${success}" class="alert alert-danger" role="alert">
+                <h3 th:text="${success}"></h3>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
