@@ -14,6 +14,11 @@ public class UserServiceImpl implements UserService{
     UsersReponsitories UsersReponsitories;
 
     @Override
+    public Users findByUsername(String email){
+        return UsersReponsitories.findByUsername(email);
+    }
+
+    @Override
     public Users save(Users s) {
         return UsersReponsitories.save(s);
     }

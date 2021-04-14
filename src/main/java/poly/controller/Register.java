@@ -15,10 +15,10 @@ public class Register {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
-    public String registerUser(ModelMap model){
+    @GetMapping("/register")
+    public String register(ModelMap model){
         model.addAttribute("users",new Users());
-        return "/login";
+        return "/register";
     }
 
     @PostMapping("/users/save")
