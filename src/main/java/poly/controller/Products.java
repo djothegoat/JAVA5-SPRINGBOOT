@@ -19,6 +19,8 @@ public class Products {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     ProductService productService;
+    @Autowired
+    CategoryService categoryService;
 
     @GetMapping("/products")
     public String list(ModelMap model, HttpServletRequest request){
@@ -58,6 +60,7 @@ public class Products {
         model.addAttribute("currentIndex",current);
         model.addAttribute("totalPageCount",totalPageCount);
         model.addAttribute("baseUrl",baseUrl);
+        model.addAttribute("category",categoryService.findAll());
 
         model.addAttribute("product",pages);
         System.out.println("bat dau: " +begin);
