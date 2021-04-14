@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import poly.entity.Product;
 import poly.service.CategoryService;
 import poly.service.ProductService;
@@ -28,16 +29,19 @@ public class Products {
     }
 
     @GetMapping("/products/page/{pageNumber}")
-    public String showProductPage(HttpServletRequest request, @PathVariable int pageNumber, ModelMap model){
+    public String showProductPage(HttpServletRequest request, @PathVariable int pageNumber,
+                                  ModelMap model, @RequestParam(value = "name",defaultValue = "")String name){
         PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
         int pagesize = 9;
-        List<Product> list = productService.findAll();
+        List<Product> list = productService.findByName(name);
         if(pages == null){
             pages = new PagedListHolder<>(list);
             pages.setPageSize(pagesize);
         }else{
+            pages = new PagedListHolder<>(list);
             final int goToPage = pageNumber - 1;
             if(goToPage <= pages.getPageCount() && goToPage >= 0){
+                pages.setPageSize(pagesize);
                 pages.setPage(goToPage);
             }
         }
@@ -46,6 +50,7 @@ public class Products {
         int begin = Math.max(1,current-list.size());
         int end = Math.min(begin + 20, pages.getPageCount());
         int totalPageCount = pages.getPageCount();
+
         System.out.println(totalPageCount);
         String baseUrl = "/products/page/";
         model.addAttribute("beginIndex",begin);
@@ -53,7 +58,12 @@ public class Products {
         model.addAttribute("currentIndex",current);
         model.addAttribute("totalPageCount",totalPageCount);
         model.addAttribute("baseUrl",baseUrl);
+
         model.addAttribute("product",pages);
+        System.out.println("bat dau: " +begin);
+        System.out.println("ket thuc: "+ end);
+        System.out.println("trang hien tai: " +current);
+        System.out.println("tong trang: " +totalPageCount);
         return "/products";
     }
 }

@@ -15,4 +15,6 @@ public interface ProductService {
     void deleteById(Integer integer);
 
     Optional<Product> findById(Integer integer);
+
+    List<Product> findByName(String name);
 }

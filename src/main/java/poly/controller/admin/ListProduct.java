@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import poly.entity.Product;
 import poly.service.CategoryService;
 import poly.service.ProductService;
@@ -24,8 +25,8 @@ public class ListProduct {
     CategoryService categoryService;
 
     @GetMapping("product/list")
-    public String list(ModelMap model){
-        List<Product> product = productService.findAll();
+    public String list(ModelMap model, @RequestParam(value = "name", defaultValue = "")String name){
+        List<Product> product = productService.findByName(name);
         model.addAttribute("product",product);
         return "admin/product/list";
     }
