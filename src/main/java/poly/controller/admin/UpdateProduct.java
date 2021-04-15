@@ -40,7 +40,7 @@ public class UpdateProduct {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
-            if(SaveLogged.USER.getRole() == null){
+            if(SaveLogged.USER.getRole() == true){
                 try {
                     String productImage =photo.getOriginalFilename();
                     if(!photo.isEmpty()){

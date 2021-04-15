@@ -30,7 +30,7 @@ public class UpdateUsers {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
-            if(SaveLogged.USER.getRole() == null){
+            if(SaveLogged.USER.getRole() == true){
                 userService.save(users);
                 model.addAttribute("users",new Users());
                 redirect.addFlashAttribute("success", "Update users successfully!");
