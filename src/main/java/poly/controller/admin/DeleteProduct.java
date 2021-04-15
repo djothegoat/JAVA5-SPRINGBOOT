@@ -23,13 +23,13 @@ public class DeleteProduct {
     CategoryService categoryService;
 
     @GetMapping("/product/delete/{id}")
-    public String delete(ModelMap model, @PathVariable(name = "id") Integer id, RedirectAttributes redirect){
+    public String delete(ModelMap model, @PathVariable(name = "id") Integer id){
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
             if(SaveLogged.USER.getRole() == true){
                 productService.deleteById(id);
-                redirect.addFlashAttribute("success", "Deleted product successfully!");
+                model.addAttribute("success", "Deleted product successfully!");
                 return "redirect:/admin/product/list";
             }else{
                 model.addAttribute("message","You can not access this page");

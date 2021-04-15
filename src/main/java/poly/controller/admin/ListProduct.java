@@ -71,17 +71,13 @@ public class ListProduct {
                 model.addAttribute("category",categoryService.findAll());
 
                 model.addAttribute("product",pages);
-                System.out.println("bat dau: " +begin);
-                System.out.println("ket thuc: "+ end);
-                System.out.println("trang hien tai: " +current);
-                System.out.println("tong trang: " +totalPageCount);
                 return "/admin/product/list";
             }else {
                 model.addAttribute("message","You can not access this page");
                 return "error";
             }
         }else {
-            return "home";
+            return "login";
         }
 
 

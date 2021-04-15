@@ -36,7 +36,7 @@ public class UpdateProduct {
     }
 
     @PostMapping("product/update")
-    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo, RedirectAttributes redirect) {
+    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo) {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
@@ -56,7 +56,7 @@ public class UpdateProduct {
                     e.printStackTrace();
                     model.addAttribute("message", "Lỗi lưu file !");
                 }
-                redirect.addFlashAttribute("success", "update product successfully!");
+                model.addAttribute("success", "update product successfully!");
                 return "redirect:/admin/product/list";
             }else{
                 model.addAttribute("message","You can not access this page");
