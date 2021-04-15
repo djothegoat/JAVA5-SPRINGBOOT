@@ -3,14 +3,13 @@
 <head th:replace="fragments :: html_head">
 <body>
 
-<div th:replace="fragments :: menu_admin"/>
+<div th:replace="fragments :: menu"/>
 <!-- Breadcrumb Start -->
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Wishlist</li>
+            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+            <li class="breadcrumb-item active">Product Manager</li>
         </ul>
     </div>
 </div>
@@ -29,7 +28,7 @@
                                 <div class="col-md-12">
                                     <div class="product-view-top">
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            <div class="col-md-4">
                                                 <div class="product-search">
                                                     <form th:action="@{/admin/product/page/1}">
                                                         <input type="text" name="name">
@@ -49,6 +48,11 @@
 
                                                     </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="product-short">
+                                                    <td><a class="btn btn-danger" th:href="@{/admin/product/add}" role="button">Add Product</a></td>
                                                 </div>
                                             </div>
                         </div>

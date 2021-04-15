@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import poly.controller.SaveLogged;
 import poly.entity.Users;
 import poly.service.UserService;
 
@@ -19,8 +20,20 @@ public class ListUsers {
 
     @GetMapping("/users/list")
     public String list(ModelMap model){
-        List<Users> users = userService.findAll();
-        model.addAttribute("users",users);
-        return "/admin/users/list";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            if(SaveLogged.USER.getRole() == true){
+                List<Users> users = userService.findAll();
+                model.addAttribute("users",users);
+                return "/admin/users/list";
+            }else{
+                model.addAttribute("message","You can not access this page");
+                return "error";
+            }
+        }else {
+            return "login";
+        }
+
     }
 }

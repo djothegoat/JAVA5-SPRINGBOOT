@@ -82,6 +82,9 @@
 <!--            </div>-->
             <div class="col-lg-12">
                 <div class="login-form">
+                    <div th:if="${logout}" class="alert alert-danger" role="alert">
+                        <h3 th:text="${logout}"></h3>
+                    </div>
                       <form th:action="@{/checkLogin}" method="post" th:object="${user}">
                           <div class="row">
                               <div class="col-md-6">

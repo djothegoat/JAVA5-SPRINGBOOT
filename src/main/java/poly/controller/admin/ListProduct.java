@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import poly.controller.SaveLogged;
 import poly.entity.Product;
+import poly.entity.Users;
 import poly.service.CategoryService;
 import poly.service.ProductService;
 
@@ -33,43 +35,56 @@ public class ListProduct {
         return "redirect:/admin/product/page/1";
     }
     @GetMapping("/product/page/{pageNumber}")
-    public String showProductPage(HttpServletRequest request, @PathVariable int pageNumber,
+    public String showProductPage(HttpServletRequest request, @PathVariable int pageNumber, Users user,
                                   ModelMap model, @RequestParam(value = "name",defaultValue = "")String name){
-        PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
-        int pagesize = 9;
-        List<Product> list = productService.findByName(name);
-        if(pages == null){
-            pages = new PagedListHolder<>(list);
-            pages.setPageSize(pagesize);
-        }else{
-            pages = new PagedListHolder<>(list);
-            final int goToPage = pageNumber - 1;
-            if(goToPage <= pages.getPageCount() && goToPage >= 0){
-                pages.setPageSize(pagesize);
-                pages.setPage(goToPage);
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            if(SaveLogged.USER.getRole() == true){
+                PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
+                int pagesize = 9;
+                List<Product> list = productService.findByName(name);
+                if(pages == null){
+                    pages = new PagedListHolder<>(list);
+                    pages.setPageSize(pagesize);
+                }else{
+                    pages = new PagedListHolder<>(list);
+                    final int goToPage = pageNumber - 1;
+                    if(goToPage <= pages.getPageCount() && goToPage >= 0){
+                        pages.setPageSize(pagesize);
+                        pages.setPage(goToPage);
+                    }
+                }
+                request.getSession().setAttribute("productlist",pages);
+                int current = pages.getPage() + 1;
+                int begin = Math.max(1,current-list.size());
+                int end = Math.min(begin + 20, pages.getPageCount());
+                int totalPageCount = pages.getPageCount();
+
+                System.out.println(totalPageCount);
+                String baseUrl = "/admin/product/page/";
+                model.addAttribute("beginIndex",begin);
+                model.addAttribute("endIndex",end);
+                model.addAttribute("currentIndex",current);
+                model.addAttribute("totalPageCount",totalPageCount);
+                model.addAttribute("baseUrl",baseUrl);
+                model.addAttribute("category",categoryService.findAll());
+
+                model.addAttribute("product",pages);
+                System.out.println("bat dau: " +begin);
+                System.out.println("ket thuc: "+ end);
+                System.out.println("trang hien tai: " +current);
+                System.out.println("tong trang: " +totalPageCount);
+                return "/admin/product/list";
+            }else {
+                model.addAttribute("message","You can not access this page");
+                return "error";
             }
+        }else {
+            return "home";
         }
-        request.getSession().setAttribute("productlist",pages);
-        int current = pages.getPage() + 1;
-        int begin = Math.max(1,current-list.size());
-        int end = Math.min(begin + 20, pages.getPageCount());
-        int totalPageCount = pages.getPageCount();
 
-        System.out.println(totalPageCount);
-        String baseUrl = "/admin/product/page/";
-        model.addAttribute("beginIndex",begin);
-        model.addAttribute("endIndex",end);
-        model.addAttribute("currentIndex",current);
-        model.addAttribute("totalPageCount",totalPageCount);
-        model.addAttribute("baseUrl",baseUrl);
-        model.addAttribute("category",categoryService.findAll());
 
-        model.addAttribute("product",pages);
-        System.out.println("bat dau: " +begin);
-        System.out.println("ket thuc: "+ end);
-        System.out.println("trang hien tai: " +current);
-        System.out.println("tong trang: " +totalPageCount);
-        return "/admin/product/list";
     }
 
 }

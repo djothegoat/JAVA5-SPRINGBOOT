@@ -94,7 +94,12 @@ public class Login {
     }
 
     @GetMapping("logout")
-    public String logOUt(){
+    public String logOUt(@ModelAttribute("user") Users user,ModelMap model,
+                         @CookieValue(value = "setUser",defaultValue = "") String setUser){
+        Cookie cookie =new Cookie("setUser",setUser);
+        model.addAttribute("cookieValue", cookie);
+        model.addAttribute("logout","Logout successfully");
+        SaveLogged.logoff();
         return "/login";
     }
 
