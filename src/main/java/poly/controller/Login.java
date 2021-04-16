@@ -67,12 +67,9 @@ public class Login {
                     //save login's information
                     SaveLogged.USER =  user;
                     boolean role = user.getRole();
-
                     model.addAttribute("login",SaveLogged.USER);
                     model.addAttribute("role",role);
-
                     return "home";
-
                 }else {
                     user.setEmail("");
                     Cookie cookie =new Cookie("setUser",setUser);

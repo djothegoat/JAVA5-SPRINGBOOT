@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head"/>
+<body>
+<div th:replace="fragments :: menu"/>
+<!--<h3>Cart Info</h3>-->
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th scope="col">Id</th>-->
+<!--        <th scope="col">name</th>-->
+<!--        <th scope="col">photo</th>-->
+<!--        <th scope="col">price</th>-->
+<!--        <th scope="col">quantity</th>-->
+<!--        <th scope="col">total</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="item: ${session.cart}">-->
+<!--        <th th:text="${item.product.id}"></th>-->
+<!--        <td th:text="${item.product.name}"></td>-->
+<!--        <td th:src="@{'/img/'+${item.product.images}}" style="height: 100px; width: 100px"></td>-->
+<!--        <td th:text="${item.product.price}"></td>-->
+<!--        <td th:text="${item.quantity}"></td>-->
+<!--        <td th:text="${item.product.price}*${item.quantity}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+            <li class="breadcrumb-item active">Product Manager</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<form th:action="@{/cart/update}" method="post">
+    <!-- Cart Start -->
+    <div class="cart-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="cart-page-inner">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody class="align-middle">
+
+                                <tr th:each="item: ${session.cart}">
+                                    <td>
+                                        <div class="img">
+                                            <a><img th:src="@{'/img/'+${item.product.images}}" alt="Image"></a>
+                                            <p th:text="${item.product.name}"></p>
+                                        </div>
+                                    </td>
+                                    <td th:text="${item.product.price}"></td>
+                                    <td >
+                                        <div class="qty">
+                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                            <input type="text"  th:value="${item.quantity}" name="quantity">
+                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td th:text="${item.product.price}*${item.quantity}"></td>
+                                    <td><a class="btn btn-light" th:href="@{'/cart/remove/' + ${item.product.id}}" role="button">X</a></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart-page-inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="coupon">
+                                    <input type="text" placeholder="Coupon Code">
+                                    <button>Apply Code</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="cart-summary">
+                                    <div class="cart-content">
+                                        <h1>Cart Summary</h1>
+                                        <p>Sub Total<span th:text="${total} + '$'"></span></p>
+                                        <h2>Grand Total: <span th:text="${total} + '$'"></span></h2>
+                                    </div>
+                                    <div >
+                                        <button type="submit" class="btn btn-danger" >Update Cart</button>
+                                        <a class="btn btn-danger" th:href="@{/checkout}" role="button">Check Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+</form>
+
+
+
+
+</body>
+<div th:replace="fragments :: footer"/>
+<div th:replace="fragments :: JS"/>
+</html>

@@ -8,11 +8,5 @@ import java.util.Optional;
 public interface OrderDetailService {
 
 
-    OrderDetail save(OrderDetail s);
-
-    List<OrderDetail> findAll();
-
-    void deleteById(Integer integer);
-
-    Optional<OrderDetail> findById(Integer integer);
+    OrderDetail  save(OrderDetail s);
 }

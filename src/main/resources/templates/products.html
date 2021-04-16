@@ -76,7 +76,7 @@
                             </div>
                             <div class="product-price">
                                 <h3 th:text="${p.price} + '$'"><span></span></h3>
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <a class="btn" th:href="@{'/cart/' + ${p.id}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity
 public class Order {
+
     private Integer id;
     private Integer total;
     private Integer status;
@@ -104,7 +105,7 @@ public class Order {
     }
 
     @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "ID", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "ID", nullable = false)
     public Users getUsersByUserId() {
         return usersByUserId;
     }

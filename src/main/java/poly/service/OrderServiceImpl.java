@@ -12,10 +12,9 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService{
     @Autowired
     OrderReponsitories OrderReponsitories;
-
     @Override
-    public Order save(Order s) {
-        return OrderReponsitories.save(s);
+    public Order save(Order order) {
+        return  OrderReponsitories.save(order);
     }
 
     @Override

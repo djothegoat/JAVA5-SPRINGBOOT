@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface OrderService {
 
 
-    Order save(Order s);
+    Order save(Order order);
 
     List<Order> findAll();
 
