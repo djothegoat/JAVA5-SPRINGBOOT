@@ -29,16 +29,18 @@
                         <form th:action="@{/thankyou}" method="post">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>UserId:</label>
-                                    <input th:value="*{userId}" name="usersByUserId" class="form-control" type="number" placeholder="First Name">
+                                    <label>UserId: <p th:text="*{userId}"></p></label>
+                                    <br/>
+                                    <input th:value="*{userId}" name="user_id" class="form-control" type="number" style="display: none">
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Total:</label>
-                                    <input th:value="*{total}" name="total" class="form-control" type="text" placeholder="Last Name">
+                                    <label>Total: <p th:text="*{total}"></p></label>
+                                    <br/>
+                                    <input th:value="*{total}" name="total" class="form-control" type="text" style="display: none">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="display: none">
                                     <label>Status</label>
-                                    <input class="form-control" type="number" name="status"  value="1" >
+                                    <input class="form-control"  type="number" name="status"  value="1" >
                                 </div>
 
                                 <div class="col-md-6">
@@ -47,13 +49,15 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label>Address</label>
-                                    <input th:value="*{address}" class="form-control" name="address" type="text" >
+                                    <label>Address<p th:text="*{phone}" ></p></label>
+                                    <br/>
+                                    <input th:value="*{address}" class="form-control" name="address" type="text" style="display: none">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label>Phone</label>
-                                    <input th:value="*{phone}"  name="phone" class="form-control"  type="text" >
+                                    <label>Phone<p th:text="*{phone}"></p></label>
+                                    <br/>
+                                    <input th:value="*{phone}"  name="phone" class="form-control"  type="text" style="display: none" >
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-danger">Submit</button>
