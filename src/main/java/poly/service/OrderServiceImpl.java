@@ -2,32 +2,28 @@ package poly.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import poly.entity.Order;
+import poly.entity.Orders;
 import poly.reponsitories.OrderReponsitories;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
     @Autowired
-    OrderReponsitories OrderReponsitories;
+    OrderReponsitories orderReponsitories;
+
     @Override
-    public Order save(Order order) {
-        return  OrderReponsitories.save(order);
+    public void save(Orders user) {
+        orderReponsitories.save(user);
     }
 
     @Override
-    public List<Order> findAll() {
-        return (List<Order>) OrderReponsitories.findAll();
+    public Optional<Orders> findById(Integer integer) {
+        return orderReponsitories.findById(integer);
     }
 
     @Override
     public void deleteById(Integer integer) {
-        OrderReponsitories.deleteById(integer);
-    }
-    @Override
-    public Optional<Order> findById(Integer integer) {
-        return OrderReponsitories.findById(integer);
+        orderReponsitories.deleteById(integer);
     }
 }

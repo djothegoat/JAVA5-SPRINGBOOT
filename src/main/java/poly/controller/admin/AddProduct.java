@@ -32,10 +32,24 @@ public class AddProduct {
 
     @GetMapping("product/add")
     public String addProduct(ModelMap model){
-        List<Category> category = categoryService.findAll();
-        model.addAttribute("category",category);
-        model.addAttribute("product",new Product());
-        return "admin/product/add";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            if(SaveLogged.USER.getRole() == true){
+                List<Category> category = categoryService.findAll();
+                model.addAttribute("category",category);
+                model.addAttribute("product",new Product());
+                return "admin/product/add";
+            }else{
+                model.addAttribute("message","You can not access this page");
+                return "error";
+            }
+        }else {
+            return "login";
+        }
+
+
     }
 
     @PostMapping("product/save")
@@ -43,6 +57,7 @@ public class AddProduct {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole()==true){
                 try {
                     String productImage =photo.getOriginalFilename();

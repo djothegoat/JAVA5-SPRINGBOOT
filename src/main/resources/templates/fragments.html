@@ -58,21 +58,31 @@
                     <div class="navbar-nav mr-auto">
                         <a th:href="@{/home}" class="nav-item nav-link">Home</a>
                         <a th:href="@{/products}" class="nav-item nav-link">Products</a>
-                        <div th:if="${role}==true">
-                            <a th:href="@{/admin/product/list}" class="nav-item nav-link">Product Managerment</a>
-                        </div>
-                        <div th:if="${role}==true">
-                            <a th:href="@{/admin/users/list}" class="nav-item nav-link">User Managerment</a>
+<!--                        <div th:if="${role}==true">-->
+<!--                            <a th:href="@{/admin/product/list}" class="nav-item nav-link">Product Managerment</a>-->
+<!--                        </div>-->
+<!--                        <div th:if="${role}==true">-->
+<!--                            <a th:href="@{/admin/users/list}" class="nav-item nav-link">User Managerment</a>-->
+<!--                        </div>-->
+                        <div class="navbar-nav ml-auto" style="float: right" >
+                            <div class="nav-item dropdown" th:if="${role} == true">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="float: right">Manager</a>
+                                <div class="dropdown-menu">
+                                    <a th:href="@{/admin/product/list}" class="dropdown-item">Products</a>
+                                    <a th:href="@{/admin/users/list}" class="dropdown-item">User</a>
+                                </div>
+                            </div>
                         </div>
                         <div th:if="${role}==false">
-                            <a href="cart.html" class="nav-item nav-link">Cart</a>
-                        </div>
-                        <div th:if="${role}==false">
-                            <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+
+                            <div th:if="${session.cart}">
+                                <a th:href="@{/cart}" class="nav-item nav-link"><div th:text="'Cart (' + ${session.cart.size()} + ')'" /> </a>
+                            </div>
                         </div>
 
+
                         <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                        <a href="" class="nav-item nav-link">Contact Us</a>
+                        <a th:href="@{/contact}" class="nav-item nav-link">Contact Us</a>
 
                     </div>
                     <div class="navbar-nav ml-auto" style="float: right" >
@@ -84,9 +94,13 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="navbar-nav ml-auto" style="float: right">
-                        <div class="nav-item dropdown" th:if="${login} != null" style="float: right">
-                            <a th:href="@{/logout}" class="nav-item nav-link" style="float: right">Logout</a>
+                        <div th:if="${name}">
+                            <h4 style="font-size: 14px; font-weight: bold" th:text="'Hello '+${name} + ' - '" ></h4>
+                        </div>
+                        <div  th:if="${login} != null" >
+                            <a  th:href="@{/logout}" class="nav-item nav-link" style="float: right; font-size: 17px"> Logout</a>
                         </div>
                     </div>
                 </div>

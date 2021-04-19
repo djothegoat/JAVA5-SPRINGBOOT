@@ -20,6 +20,7 @@ public class DeleteUsers {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
                 userService.deleteById(id);
                 return "redirect:/admin/users/list";

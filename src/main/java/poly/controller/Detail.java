@@ -24,10 +24,18 @@ public class Detail {
 
     @GetMapping("/product/{id}")
     public String detail(ModelMap model, @PathVariable(name = "id") Integer id){
-        List<Category> category = categoryService.findAll();
-        model.addAttribute("category",category);
-        Optional<Product> opt = productService.findById(id);
-        model.addAttribute("product", opt.get());
-        return "detail";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            List<Category> category = categoryService.findAll();
+            model.addAttribute("category",category);
+            Optional<Product> opt = productService.findById(id);
+            model.addAttribute("product", opt.get());
+            return "detail";
+        }else {
+            return "login";
+        }
+
     }
 }

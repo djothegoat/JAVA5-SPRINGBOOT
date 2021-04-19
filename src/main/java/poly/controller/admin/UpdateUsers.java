@@ -20,9 +20,24 @@ public class UpdateUsers {
 
     @GetMapping("/users/update/{id}")
     public String update(ModelMap model, @PathVariable(name = "id") Integer id){
-        Optional<Users> users = userService.findById(id);
-        model.addAttribute("users",users.get());
-        return "admin/users/update";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            if(SaveLogged.USER.getRole() == true){
+                Optional<Users> users = userService.findById(id);
+                model.addAttribute("users",users.get());
+                return "admin/users/update";
+            }else{
+                model.addAttribute("message","You can not access this page");
+                return "error";
+            }
+        }else {
+            return "login";
+        }
+
+
+
     }
 
     @PostMapping("/users/update")
@@ -30,6 +45,7 @@ public class UpdateUsers {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
                 userService.save(users);
                 model.addAttribute("users",new Users());

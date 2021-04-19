@@ -1,13 +1,11 @@
 package poly.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import poly.entity.*;
 import poly.service.OrderService;
 import poly.service.ProductService;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class Cart {
@@ -33,8 +30,15 @@ public class Cart {
 
     @GetMapping("/cart")
     public String cart(ModelMap model, HttpSession session){
-        model.addAttribute("total", total(session));
-        return "cart";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            model.addAttribute("total", total(session));
+            return "cart";
+        }else {
+            return "login";
+        }
     }
 
     @GetMapping(value = "cart/{id}")
@@ -43,6 +47,7 @@ public class Cart {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(session.getAttribute("cart")==null){
                 List<Item> cart = new ArrayList<>();
                 cart.add(new Item(productService.findById(id).get(),1));
@@ -68,41 +73,39 @@ public class Cart {
 
     @GetMapping("/checkout")
     public String checkout(HttpSession session, ModelMap model){
-        model.addAttribute("phone",SaveLogged.USER.getPhone());
-        model.addAttribute("address",SaveLogged.USER.getAddress());
-        model.addAttribute("userId",SaveLogged.USER.getId());
-        model.addAttribute("total", total(session));
-        model.addAttribute("order",new Order());
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("phone",SaveLogged.USER.getPhone());
+            model.addAttribute("address",SaveLogged.USER.getAddress());
+            model.addAttribute("userId",SaveLogged.USER.getId());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            model.addAttribute("total", total(session));
+            model.addAttribute("order",new Orders());
 
-//        Order order = new Order();
-//        order.setNotice("1111");
-//        order.setAddress(SaveLogged.USER.getAddress());
-//        order.setPhone(SaveLogged.USER.getPhone());
-//        order.setStatus(1);
-//        order.setTotal(total(session));
-//        order.setUsersByUserId(SaveLogged.USER);
-//        orderService.save(order);
-        return "/checkout";
+            return "/checkout";
+        }else {
+            return "login";
+        }
     }
 
     @PostMapping("/thankyou")
-    public String thankyou(ModelMap model, Order order, HttpSession session){
-        //add order
-        orderService.save(order);
-        //add order detail
-//        List<Item> cart = (List<Item>) session.getAttribute("cart");
-//        for(Item item: cart){
-//            OrderDetail orderDetail = new OrderDetail();
-//            orderDetail.setQuanlity(1);
-//            orderDetail.setDiscount(0);
-//
-//        }
+    public String thankyou(ModelMap model, Orders order, HttpSession session){
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            //add order
+            orderService.save(order);
+            // remove cart
+            session.removeAttribute("cart");
+            model.addAttribute("order",new Orders());
+            return "thankyou";
+        }else {
+            return "login";
+        }
 
-        // remove cart
 
-        session.removeAttribute("cart");
-        model.addAttribute("order",new Order());
-        return "redirect:/checkout";
+
     }
 
     @PostMapping("cart/update")

@@ -40,6 +40,7 @@ public class ListProduct {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
                 PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
                 int pagesize = 9;

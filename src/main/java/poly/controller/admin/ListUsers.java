@@ -23,6 +23,7 @@ public class ListUsers {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
                 List<Users> users = userService.findAll();
                 model.addAttribute("users",users);

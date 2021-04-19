@@ -13,7 +13,7 @@ public class Users {
     private String address;
     private String phone;
     private Boolean status;
-    private List<Order> ordersById;
+    private List<Orders> ordersById;
 
     @Id
     @Column(name = "ID")
@@ -129,11 +129,11 @@ public class Users {
     }
 
     @OneToMany(mappedBy = "usersByUserId")
-    public List<Order> getOrdersById() {
+    public List<Orders> getOrdersById() {
         return ordersById;
     }
 
-    public void setOrdersById(List<Order> ordersById) {
+    public void setOrdersById(List<Orders> ordersById) {
         this.ordersById = ordersById;
     }
 }

@@ -36,6 +36,7 @@ public class Products {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("productlist");
             int pagesize = 9;
             List<Product> list = productService.findByName(name);

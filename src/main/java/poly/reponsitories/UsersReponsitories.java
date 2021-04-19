@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import poly.entity.Users;
 
-import java.util.List;
 
 @Repository
 public interface UsersReponsitories extends CrudRepository<Users, Integer> {

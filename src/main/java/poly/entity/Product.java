@@ -13,7 +13,6 @@ public class Product {
     private String images;
     private Boolean status;
     private Integer discount;
-    private List<OrderDetail> orderDetailsById;
     private Category categoryByCategory;
 
     @Id
@@ -129,14 +128,7 @@ public class Product {
         return result;
     }
 
-    @OneToMany(mappedBy = "productByProductId")
-    public List<OrderDetail> getOrderDetailsById() {
-        return orderDetailsById;
-    }
 
-    public void setOrderDetailsById(List<OrderDetail> orderDetailsById) {
-        this.orderDetailsById = orderDetailsById;
-    }
 
     @ManyToOne
     @JoinColumn(name = "Category", referencedColumnName = "ID", nullable = false)

@@ -1,6 +1,7 @@
 package poly.service;
 
-import poly.entity.Order;
+
+import poly.entity.Orders;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,11 +9,9 @@ import java.util.Optional;
 public interface OrderService {
 
 
-    Order save(Order order);
+    void save(Orders user);
 
-    List<Order> findAll();
+    Optional<Orders> findById(Integer integer);
 
     void deleteById(Integer integer);
-
-    Optional<Order> findById(Integer integer);
 }

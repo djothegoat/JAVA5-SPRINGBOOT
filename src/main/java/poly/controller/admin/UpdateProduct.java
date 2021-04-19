@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import poly.controller.SaveLogged;
 import poly.entity.Category;
 import poly.entity.Product;
@@ -28,11 +28,26 @@ public class UpdateProduct {
 
     @GetMapping("/product/update/{id}")
     public String edit(ModelMap model, @PathVariable(name = "id") Integer id){
-        List<Category> category = categoryService.findAll();
-        model.addAttribute("category",category);
-        Optional<Product> opt = productService.findById(id);
-        model.addAttribute("product", opt.get());
-        return "admin/product/update";
+        if(SaveLogged.authenticated()){
+            model.addAttribute("login",SaveLogged.USER);
+            model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
+            if(SaveLogged.USER.getRole() == true){
+                List<Category> category = categoryService.findAll();
+                model.addAttribute("category",category);
+                Optional<Product> opt = productService.findById(id);
+                model.addAttribute("product", opt.get());
+                return "admin/product/update";
+            }else{
+                model.addAttribute("message","You can not access this page");
+                return "error";
+            }
+        }else {
+            return "login";
+        }
+
+
+
     }
 
     @PostMapping("product/update")
@@ -40,6 +55,7 @@ public class UpdateProduct {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
                 try {
                     String productImage =photo.getOriginalFilename();

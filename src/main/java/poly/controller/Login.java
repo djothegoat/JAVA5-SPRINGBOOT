@@ -67,8 +67,10 @@ public class Login {
                     //save login's information
                     SaveLogged.USER =  user;
                     boolean role = user.getRole();
+                    String name = user.getName();
                     model.addAttribute("login",SaveLogged.USER);
                     model.addAttribute("role",role);
+                    model.addAttribute("name",name);
                     return "home";
                 }else {
                     user.setEmail("");
