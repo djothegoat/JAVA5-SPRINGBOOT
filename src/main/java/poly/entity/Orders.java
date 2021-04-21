@@ -1,6 +1,7 @@
 package poly.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,9 +12,18 @@ public class Orders {
     private Integer status;
     private String address;
     private String notice;
+    public String date;
     private String phone;
+
     private Users usersByUserId;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     @Id
     @Column(name = "ID")

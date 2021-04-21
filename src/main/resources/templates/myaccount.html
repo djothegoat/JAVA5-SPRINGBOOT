@@ -226,7 +226,7 @@
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Date</th>
                                     <th>Address</th>
                                     <th>Phone</th>
                                     <th>Total</th>
@@ -235,7 +235,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="o: ${orders}">
-                                    <td th:text="${name}"></td>
+                                    <td th:text="${o.date}"></td>
                                     <td th:text="*{o.address}"></td>
                                     <td th:text="*{o.phone}"></td>
                                     <td th:text="*{o.total}"><p>$</p></td>

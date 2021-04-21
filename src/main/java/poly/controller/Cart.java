@@ -13,7 +13,9 @@ import poly.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -96,6 +98,9 @@ public class Cart {
             model.addAttribute("role",SaveLogged.USER.getRole());
             model.addAttribute("name",SaveLogged.USER.getName());
             //add order
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            order.setDate(formatter.format(date));
             orderService.save(order);
             // remove cart
             session.removeAttribute("cart");
