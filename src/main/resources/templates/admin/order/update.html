@@ -59,6 +59,11 @@
                                     <input th:field="*{address}" class="form-control" type="text" style="display: none">
                                 </div>
                                 <div class="col-md-6">
+                                    <label><p th:text="'Date :' + *{date}" ></p></label>
+                                    <br/>
+                                    <input th:field="*{date}" class="form-control" type="text" style="display: none">
+                                </div>
+                                <div class="col-md-6">
                                     <label><p th:text="'Notice :' + *{notice}" ></p></label>
                                     <br/>
                                     <input th:field="*{notice}"  class="form-control" type="text" style="display: none">
