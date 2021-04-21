@@ -28,6 +28,9 @@
                     <div class="billing-address">
                         <h2>Add Product</h2>
                         <form th:action="@{/admin/product/save}" method="post" th:object="${product}" enctype="multipart/form-data">
+                            <div th:if="${success}" class="alert alert-danger" role="alert">
+                                <h3 th:text="${success}"></h3>
+                            </div>
                             <div class="row">
                                 <div th:if="${id >0}">
                                     <div class="col-md-12">

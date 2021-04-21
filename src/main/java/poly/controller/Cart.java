@@ -94,6 +94,7 @@ public class Cart {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
+            model.addAttribute("name",SaveLogged.USER.getName());
             //add order
             orderService.save(order);
             // remove cart

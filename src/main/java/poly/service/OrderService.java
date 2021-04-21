@@ -11,6 +11,13 @@ public interface OrderService {
 
     void save(Orders user);
 
+
+
+    List<Orders> findByUserId(Integer id);
+
+
+    List<Orders> findAll();
+
     Optional<Orders> findById(Integer integer);
 
     void deleteById(Integer integer);

@@ -69,12 +69,13 @@ public class AddProduct {
                         product.setImages(productImage);
                     }
                     productService.save(product);
+                    redirect.addAttribute("success", "Add product successfully!");
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                     model.addAttribute("message", "Lỗi lưu file !");
                 }
-                redirect.addFlashAttribute("success", "Add product successfully!");
+                redirect.addAttribute("success", "Add product successfully!");
                 return "redirect:/admin/product/list";
             }else{
                 model.addAttribute("message","You can not access this page");
@@ -83,11 +84,5 @@ public class AddProduct {
         }else {
             return "login";
         }
-
-
     }
-
-
-
-
 }

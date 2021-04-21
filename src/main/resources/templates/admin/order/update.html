@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin/users/list}">User Manager</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/order/list}">Order Manager</a></li>
             <li class="breadcrumb-item active">Update</li>
         </ul>
     </div>
@@ -27,47 +27,47 @@
                 <div class="checkout-inner">
                     <div class="billing-address">
                         <h2>Update Product</h2>
-                        <form th:action="@{/admin/users/update}" method="post" th:object="${users}" enctype="multipart/form-data">
+                        <form th:action="@{/admin/order/update}" method="post" th:object="${orders}" enctype="multipart/form-data">
                             <div class="row">
                                 <input th:field="*{id}" class="form-control" type="number" style="display: none">
                                 <div class="col-md-12">
-                                    <label>Name</label>
-                                    <input  th:field="*{name}" class="form-control" type="text" placeholder="Name">
+                                    <label><p th:text="'UserId :' + *{usersByUserId.getId()}" ></p></label>
+                                    <br/>
+                                    <input  th:field="*{usersByUserId}" class="form-control" type="text" style="display: none">
                                 </div>
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                    <input  th:field="*{email}" class="form-control" type="text" placeholder="Email">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Password</label>
-                                    <input  th:field="*{password}" class="form-control" type="text" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Address</label>
-                                    <input th:field="*{address}" class="form-control" type="text" placeholder="Email">
-                                </div>
-                                <div class="col-md-6" >
-                                    <label>Role</label>
+                                <div class="col-md-12" >
+                                    <label>Status :</label>
                                     <li>
-                                        <input type="radio" th:field="*{role}" value=1  />
-                                        <label>Admin</label>
-                                        <input type="radio" th:field="*{role}" value=0/>
-                                        <label>Guest</label>
+                                        <input  style="margin-left: 10px" type="radio" th:field="*{status}" value=0  />
+                                        <label >Wait for pay</label>
+                                        <input  style="margin-left: 10px" type="radio" th:field="*{status}" value=1 />
+                                        <label >Paid, Shipping</label>
+                                        <input style="margin-left: 10px" type="radio" th:field="*{status}" value=2 />
+                                        <label >Complete</label>
+                                        <input  style="margin-left: 10px" type="radio" th:field="*{status}" value=3  />
+                                        <label >Cancel</label>
                                     </li>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Mobile No</label>
-                                    <input th:field="*{phone}" class="form-control" type="text" placeholder="Mobile No">
+                                    <label><p th:text="'Total :' + *{total}" ></p></label>
+                                    <br/>
+                                    <input  th:field="*{total}"  class="form-control" type="text" style="display: none">
+                                </div>
+                                <div class="col-md-6">
+                                    <label><p th:text="'Address :' + *{address}" ></p></label>
+                                    <br/>
+                                    <input th:field="*{address}" class="form-control" type="text" style="display: none">
+                                </div>
+                                <div class="col-md-6">
+                                    <label><p th:text="'Notice :' + *{notice}" ></p></label>
+                                    <br/>
+                                    <input th:field="*{notice}"  class="form-control" type="text" style="display: none">
                                 </div>
 
-                                <div class="col-md-6" >
-                                    <label>Status</label>
-                                    <li>
-                                        <input type="radio" th:field="*{status}" value=1  />
-                                        <label>Active</label>
-                                        <input type="radio" th:field="*{status}" value=0 />
-                                        <label>Inactive</label>
-                                    </li>
+                                <div class="col-md-6">
+                                    <label><p th:text="'Mobile No :' + *{phone}" ></p></label>
+                                    <br/>
+                                    <input th:field="*{phone}"  class="form-control" type="text" style="display: none" >
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-danger" value="add">Update</button>

@@ -4,34 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import poly.controller.SaveLogged;
-import poly.service.CategoryService;
-import poly.service.ProductService;
+import poly.entity.Orders;
+import poly.service.OrderService;
 
-import javax.servlet.ServletContext;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/")
-public class DeleteProduct {
+public class ListOrder {
     @Autowired
-    ProductService productService;
+    OrderService orderService;
 
-    @Autowired
-    CategoryService categoryService;
-
-    @GetMapping("/product/delete/{id}")
-    public String delete(ModelMap model, @PathVariable(name = "id") Integer id, RedirectAttributes redirect){
+    @GetMapping("order/list")
+    public String list(ModelMap model){
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
             model.addAttribute("name",SaveLogged.USER.getName());
             if(SaveLogged.USER.getRole() == true){
-                productService.deleteById(id);
-                redirect.addAttribute("message", "Delete product successfully!");
-                return "redirect:/admin/product/list";
+                List<Orders> orders = orderService.findAll();
+                model.addAttribute("orders",orders);
+                return "admin/order/list";
             }else{
                 model.addAttribute("message","You can not access this page");
                 return "error";

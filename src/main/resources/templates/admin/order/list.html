@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-            <li class="breadcrumb-item active">User Manager</li>
+            <li class="breadcrumb-item active">Order Manager</li>
 
         </ul>
     </div>
@@ -32,42 +32,30 @@
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                             <tr>
-                                <th >User</th>
-                                <th >Email</th>
-                                <th >Role</th>
-                                <th >Address</th>
-                                <th >Phone</th>
+                                <th >UserId</th>
+                                <th >Total</th>
                                 <th >Status</th>
-                                <th >Remove</th>
+                                <th >Address</th>
+                                <th >Notice</th>
+                                <th >Phone</th>
                                 <th >Update</th>
                             </tr>
                             </thead>
                             <tbody class="align-middle">
-                            <div th:each="s: ${users}" >
+                            <div th:each="s: ${orders}" >
                                 <tr>
-                                    <td>
-                                        <div class="img">
-                                            <p th:text="${s.name}"></p>
-                                        </div>
+                                    <td th:text="${s.usersByUserId.getId()}"></td>
+                                    <td th:text="${s.total}"></td>
+                                    <td th:switch="${s.status}">
+                                        <span th:case="0" >Wait for pay</span>
+                                        <span th:case="1" >Paid, Shipping</span>
+                                        <span th:case="2" >Complete</span>
+                                        <span th:case="3">Cancel</span>
                                     </td>
-                                    <td th:text="${s.email}"></td>
-                                    <div th:if="${s.role} == true">
-                                        <td style="color: #FF6F61">Admin</td>
-                                    </div>
-                                    <div th:if="${s.role} == false">
-                                        <td style="color: #FF6F61">Guest</td>
-                                    </div>
                                     <td th:text="${s.address}"></td>
+                                    <td th:text="${s.notice}"></td>
                                     <td th:text="${s.phone}"></td>
-                                    <div th:if="${s.status} == true">
-                                        <td style="color: #FF6F61">Active</td>
-                                    </div>
-                                    <div th:if="${s.status} == false">
-                                        <td style="color: #FF6F61">Inactive</td>
-                                    </div>
-
-                                    <td><a class="btn btn-light" th:href="@{'/admin/users/delete/' + ${s.id}}" role="button">X</a></td>
-                                    <td><a class="btn btn-danger" th:href="@{'/admin/users/update/' + ${s.id}}" role="button">Update</a></td>
+                                    <td><a class="btn btn-danger" th:href="@{'/admin/order/update/' + ${s.id}}" role="button">Update</a></td>
                                 </tr>
                             </div>
 

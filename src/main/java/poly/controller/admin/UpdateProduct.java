@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import poly.controller.SaveLogged;
 import poly.entity.Category;
 import poly.entity.Product;
@@ -37,6 +38,7 @@ public class UpdateProduct {
                 model.addAttribute("category",category);
                 Optional<Product> opt = productService.findById(id);
                 model.addAttribute("product", opt.get());
+
                 return "admin/product/update";
             }else{
                 model.addAttribute("message","You can not access this page");
@@ -51,7 +53,7 @@ public class UpdateProduct {
     }
 
     @PostMapping("product/update")
-    public String update(ModelMap model,Product product, @RequestParam("imagesfile") MultipartFile photo) {
+    public String update(ModelMap model, Product product, @RequestParam("imagesfile") MultipartFile photo, RedirectAttributes redirect) {
         if(SaveLogged.authenticated()){
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
@@ -72,7 +74,6 @@ public class UpdateProduct {
                     e.printStackTrace();
                     model.addAttribute("message", "Lỗi lưu file !");
                 }
-                model.addAttribute("success", "update product successfully!");
                 return "redirect:/admin/product/list";
             }else{
                 model.addAttribute("message","You can not access this page");
@@ -81,7 +82,5 @@ public class UpdateProduct {
         }else {
             return "login";
         }
-
-
     }
 }

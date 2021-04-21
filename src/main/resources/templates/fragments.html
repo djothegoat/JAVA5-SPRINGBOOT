@@ -70,6 +70,7 @@
                                 <div class="dropdown-menu">
                                     <a th:href="@{/admin/product/list}" class="dropdown-item">Products</a>
                                     <a th:href="@{/admin/users/list}" class="dropdown-item">User</a>
+                                    <a th:href="@{/admin/order/list}" class="dropdown-item">Order</a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +82,7 @@
                         </div>
 
 
-                        <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                        <a th:href="@{/myaccount}" class="nav-item nav-link">My Account</a>
                         <a th:href="@{/contact}" class="nav-item nav-link">Contact Us</a>
 
                     </div>
