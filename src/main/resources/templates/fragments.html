@@ -81,8 +81,10 @@
                             </div>
                         </div>
 
+                        <div th:if="${login} != null">
+                            <a th:href="@{/myaccount}" class="nav-item nav-link">My Account</a>
+                        </div>
 
-                        <a th:href="@{/myaccount}" class="nav-item nav-link">My Account</a>
                         <a th:href="@{/contact}" class="nav-item nav-link">Contact Us</a>
 
                     </div>
