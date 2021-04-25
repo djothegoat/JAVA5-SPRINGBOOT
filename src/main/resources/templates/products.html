@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="product-search">
-                                        <form th:action="@{/products/page/1}">
+                                        <form th:action="@{'/products/page/'+ ${currentIndex}}">
                                             <input type="text" name="name">
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
@@ -91,20 +91,20 @@
                                 <a class="page-link" th:href="@{/products/}" >First</a>
                             </li>
                             <li th:class="${currentIndex == 1}?'page-item disabled':'page-item active'">
-                                <a th:href="@{|${baseUrl}${currentIndex - 1}|}">Previous</a>
+                                <a th:href="@{|${baseUrl}${currentIndex - 1}?name=${search}|}">Previous</a>
                             </li>
                             <li th:each="item: ${#numbers.sequence(beginIndex,endIndex)}"
                                 th:class="${item == currentIndex ?'page-item disabled':'page-item'}">
-                                <a class="page-link" th:href="@{|${baseUrl}${item}|}">
+                                <a class="page-link" th:href="@{|${baseUrl}${item}?name=${search}|}">
                                     <span th:text="${item}"></span>
                                 </a>
                             </li>
 
                             <li  th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
-                                <a class="page-link" th:href="@{|${baseUrl}${currentIndex + 1}|}">Next</a>
+                                <a class="page-link" th:href="@{|${baseUrl}${currentIndex + 1}?name=${search}|}">Next</a>
                             </li>
                             <li th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
-                                <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}" >Last</a>
+                                <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}?name=${search}|}" >Last</a>
                             </li>
                         </ul>
                     </nav>

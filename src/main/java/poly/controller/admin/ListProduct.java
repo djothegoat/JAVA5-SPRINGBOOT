@@ -70,8 +70,8 @@ public class ListProduct {
                 model.addAttribute("totalPageCount",totalPageCount);
                 model.addAttribute("baseUrl",baseUrl);
                 model.addAttribute("category",categoryService.findAll());
-
                 model.addAttribute("product",pages);
+                model.addAttribute("search",name);
                 return "/admin/product/list";
             }else {
                 model.addAttribute("message","You can not access this page");

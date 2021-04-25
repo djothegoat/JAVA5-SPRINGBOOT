@@ -30,7 +30,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="product-search">
-                                                    <form th:action="@{/admin/product/page/1}">
+                                                    <form th:action="@{'/admin/product/page/' + ${currentIndex} }">
                                                         <input type="text" name="name">
                                                         <button type="submit"><i class="fa fa-search"></i></button>
                                                     </form>
@@ -43,7 +43,6 @@
                                                         <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
                                                         <div class="dropdown-menu dropdown-menu-right" name="name" >
                                                             <a th:each="c: ${category}" th:href="@{/admin/product/page/1(name=${c.getName()})}"  th:text="${c.getName()}" class="dropdown-item">jacket</a>
-
                                                         </div>
 
                                                     </div>
@@ -122,20 +121,20 @@
                                             <a class="page-link" th:href="@{/products/}" >First</a>
                                         </li>
                                         <li th:class="${currentIndex == 1}?'page-item disabled':'page-item active'">
-                                            <a th:href="@{|${baseUrl}${currentIndex - 1}|}">Previous</a>
+                                            <a th:href="@{|${baseUrl}${currentIndex - 1}?name=${search}|}">Previous</a>
                                         </li>
                                         <li th:each="item: ${#numbers.sequence(beginIndex,endIndex)}"
                                             th:class="${item == currentIndex ?'page-item disabled':'page-item'}">
-                                            <a class="page-link" th:href="@{|${baseUrl}${item}|}">
+                                            <a class="page-link" th:href="@{|${baseUrl}${item}?name=${search}|}">
                                                 <span th:text="${item}"></span>
                                             </a>
                                         </li>
 
                                         <li  th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
-                                            <a class="page-link" th:href="@{|${baseUrl}${currentIndex + 1}|}">Next</a>
+                                            <a class="page-link" th:href="@{|${baseUrl}${currentIndex + 1}?name=${search}|}">Next</a>
                                         </li>
                                         <li th:class="${currentIndex == totalPageCount} ? 'page-item disabled' : 'page-item active'">
-                                            <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}" >Last</a>
+                                            <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}?name=${search}|}" >Last</a>
                                         </li>
                                     </ul>
                                 </nav>

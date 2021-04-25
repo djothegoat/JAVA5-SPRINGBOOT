@@ -97,6 +97,7 @@ public class Products {
             model.addAttribute("baseUrl",baseUrl);
             model.addAttribute("category",categoryService.findAll());
             model.addAttribute("product",pages);
+            model.addAttribute("search",name);
             return "/products";
         }
 

@@ -84,7 +84,6 @@ public class Cart {
             model.addAttribute("name",SaveLogged.USER.getName());
             model.addAttribute("total", total(session));
             model.addAttribute("order",new Orders());
-
             return "/checkout";
         }else {
             return "login";
@@ -97,7 +96,9 @@ public class Cart {
             model.addAttribute("login",SaveLogged.USER);
             model.addAttribute("role",SaveLogged.USER.getRole());
             model.addAttribute("name",SaveLogged.USER.getName());
+
             //add order
+
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
             order.setDate(formatter.format(date));
