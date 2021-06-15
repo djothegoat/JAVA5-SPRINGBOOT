@@ -133,7 +133,7 @@ public class Cart {
         cart.remove(index);
         return "redirect:/cart";
     }
-
+    // check exist
     private int isExist(int id, List<Item> cart){
         for(int i = 0; i< cart.size(); i++){
             if(cart.get(i).getProduct().getId() == id){
