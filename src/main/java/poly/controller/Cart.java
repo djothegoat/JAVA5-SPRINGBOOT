@@ -142,7 +142,7 @@ public class Cart {
         }
         return -1;
     }
-
+    // get total price
     private int total(HttpSession session){
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         int s = 0;
